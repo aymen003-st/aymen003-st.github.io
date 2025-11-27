@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Project 1</title>
+        <style>
+            :root{
+                --left-a:#4c1d95;
+                --left-b:#7c3aed;
+                --right-a:#065f46;
+                --right-b:#06b6d4;
+                --text-light: #f8fafc;
+                --muted: rgba(248,250,252,0.85);
+            }
+            *{box-sizing:border-box;margin:0;padding:0}
+            html,body{height:100%;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;background:#08121a;color:var(--text-light)}
+
+            .split{overflow:hidden;min-height:100vh}
+            .pane{float:left;width:50%;display:block;align-items:stretch;justify-content:center;padding:32px;box-sizing:border-box;}
+
+            .left{background:linear-gradient(180deg,var(--left-a),var(--left-b));}
+            .right{background:linear-gradient(180deg,var(--right-a),var(--right-b));}
+
+            .card{max-width:520px;width:100%;background:rgba(255,255,255,0.03);padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 30px rgba(2,8,23,0.5);display:flex;flex-direction:column;justify-content:center;min-height:calc(100vh - 64px)}
+
+            h1{font-size:28px;margin-bottom:10px}
+            p{color:var(--muted);line-height:1.6}
+
+
+            .checklist{margin-top:16px;padding:0;list-style:none;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+            .menu-item{background:transparent;border:0;color:var(--muted);text-align:left;padding:10px 12px;border-radius:8px;font-size:15px;cursor:pointer;width:100%}
+            .menu-item:hover,.menu-item:focus{color:var(--text-light);background:rgba(255,255,255,0.02);outline:2px solid rgba(255,255,255,0.03)}
+
+            .meta{display:flex;flex-direction:column;gap:10px}
+            .meta .item{font-size:14px;color:var(--muted)}
+            .tech-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+            .chip{background:rgba(255,255,255,0.06);padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px}
+
+            @media (max-width:880px){
+                .pane{float:none;width:100%;padding:18px}
+                .split{min-height:initial}
+                h1{font-size:22px}
+            }
+        </style>
+    </head>
+    <body>
+        <div class="split">
+            <section class="pane left">
+                <div class="card">
+                    <h1>Project A</h1>
+                    <p>Description about the project...</p>
+
+                                <ul class="checklist" role="menu" >
+                                    <li role="none"><button class="menu-item" role="menuitem" tabindex="0">Content table</button></li>
+                                    <li role="none"><button class="menu-item" role="menuitem" tabindex="0">Introduction</button></li>
+                                    <li role="none"><button class="menu-item" role="menuitem" tabindex="0">Description</button></li>
+                                    <li role="none"><button class="menu-item" role="menuitem" tabindex="0">Conclusion</button></li>
+                                </ul>
+                </div>
+            </section>
+
+            <aside class="pane right">
+                <div class="card">
+                    <h1 style="margin-bottom:8px">Details</h1>
+                    <div class="meta">
+                        <div class="item"><strong>Role:</strong> </div>
+                        <div class="item"><strong>Timeline:</strong> </div>
+                        <div class="item"><strong>Goal:</strong> </div>
+                    </div>
+
+                    <div class="tech-list">
+                        <span class="chip">HTML</span>
+                        <span class="chip">CSS</span>
+                        <span class="chip">JavaScript</span>
+                        <span class="chip">Accessibility</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </body>
+</html>
