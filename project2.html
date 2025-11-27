@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project 2</title>
+    <style>
+        :root{
+            --left-1:#4c1d95;
+            --left-2:#7c3aed;
+            --mid-1:#2563eb;
+            --mid-2:#60a5fa;
+            --right-1:#065f46;
+            --right-2:#06b6d4;
+            --bg-grad-1:#0b1220;
+            --card-text:#e6f7ff;
+            --muted:rgba(230,247,255,0.85);
+        }
+        *{box-sizing:border-box}
+        body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;background:linear-gradient(135deg,var(--bg-grad-1),#021025);color:var(--card-text)}
+
+        header{padding:12px 18px}
+        header ul{list-style:none;display:flex;gap:14px;margin:0;padding:0}
+        header a{color:var(--muted);text-decoration:none;font-weight:700}
+
+        .cols{overflow:hidden}
+        .col{float:left;width:33.3333%;min-height:calc(100vh - 64px);padding:28px;box-sizing:border-box}
+
+        .box{height:100%;background:linear-gradient(180deg,var(--left-1),var(--left-2));border-radius:12px;padding:20px;color:var(--card-text);box-shadow:0 10px 30px rgba(0,0,0,0.5);display:flex;flex-direction:column;justify-content:center;min-height:calc(100vh - 96px)}
+        .col.mid .box{background:linear-gradient(180deg,var(--mid-1),var(--mid-2))}
+        .col.right .box{background:linear-gradient(180deg,var(--right-1),var(--right-2))}
+
+        .box h2{margin:0 0 8px}
+        .box p{color:var(--muted);line-height:1.6;font-weight: 700;}
+
+        @media (max-width:900px){
+            .col{float:none;width:100%;padding:18px;min-height:auto}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JS</a></li>
+        </ul>
+    </header>
+
+    <div class="cols">
+        <section class="col left">
+            <div class="box">
+                <div>
+                    <h2>HTML</h2>
+                    <p>HTML provides the structure and semantic meaning for content on the web — headings, paragraphs, lists, and forms that browsers render.</p>
+                </div>
+        </section>
+
+        <section class="col mid">
+            <div class="box">
+                <div>
+                    <h2>CSS</h2>
+                    <p>CSS controls the presentation — layout, colors, spacing, and responsiveness. Keep styles modular and prefer variables for consistent theming.</p>
+                </div>
+        </section>
+
+        <section class="col right">
+            <div class="box">
+                <div>
+                    <h2>JavaScript</h2>
+                    <p>JavaScript adds interactivity: DOM updates, event handling, and dynamic behavior. Keep logic separated from presentation for easier maintenance.</p>
+                </div>
+        </section>
+    </div>
+</body>
+</html>
