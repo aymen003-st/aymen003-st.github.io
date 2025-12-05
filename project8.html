@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: #545353;
+        }
+
+        h1 {
+            font-size: 40px;
+            padding-top: 0px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            text-decoration: underline;
+            background: #000000;
+            background: radial-gradient(circle, #DF8908 10%, #ff1d15 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #cotainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #030303;
+            width: 450px;
+            height: 450px;
+            border-radius: 50px;
+        }
+
+        #display {
+            height: 200px;
+            width: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            background: linear-gradient(#111, #111) padding-box,
+                linear-gradient(270deg, #DF8908 10%, #ff1d15 100%) border-box;
+            border-radius: 50em;
+            border: 4px solid transparent;
+        }
+
+        #display h3 {
+            font-size: 35px;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #000000;
+            background: radial-gradient(circle, #DF8908 10%, #ff1d15 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #controls button {
+            display: inline;
+            margin: 10px;
+            padding: 10px;
+            width: 100px;
+            height: 100px;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        #startbtn {
+            position: relative;
+            color: rgb(3, 94, 16);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #stopbtn {
+            position: relative;
+            color: #ff1d15;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #resetbtn {
+            position: relative;
+            color: #3da8f5;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #startbtn::before {
+            content: "";
+            width: 100%;
+            height: 0%;
+            border-radius: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(90deg, #0fd850 0%, #f9f047 100%);
+            transition: 0.5s;
+            z-index: -1;
+            display: block;
+        }
+
+        #startbtn:hover::before {
+            height: 100%;
+        }
+
+        #stopbtn::before {
+            content: "";
+            width: 100%;
+            height: 0%;
+            border-radius: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(270deg, #DF8908 10%, #ff1d15 100%);
+            transition: 0.5s;
+            z-index: -1;
+            display: block;
+        }
+
+        #stopbtn:hover::before {
+            height: 100%;
+        }
+
+        #resetbtn::before {
+            content: "";
+            width: 100%;
+            height: 0%;
+            border-radius: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(90deg, #035097, #046fc6, #1a84fd);
+            transition: 0.5s;
+            z-index: -1;
+            display: block;
+        }
+
+        #resetbtn:hover::before {
+            height: 100%;
+        }
+        @media(max-width: 500px){
+            #myh1{
+                font-size: 30px;
+            }
+            #cotainer{
+                width: 90vw;
+                height: auto;
+                }
+            #display{
+                width: 60vw;
+                height: 60vw;
+            }
+            #display h3{
+                font-size: 10vw;
+            }
+            #controls button{
+                width: 55px;
+                height: 55px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="cotainer">
+        <h1 id="myh1">stop watch</h1>
+        <div id="display">
+            <h3>00:00:00:00</h3>
+        </div>
+        <div id="controls">
+            <button id="startbtn" onclick="start()">Start</button>
+            <button id="stopbtn" onclick="stop()">Stop</button>
+            <button id="resetbtn" onclick="reset()">Reset</button>
+        </div>
+    </div>
+    <script>
+        let startTime = 0;
+        let elapsedTime = 0;
+        let timerInterval;
+        let isRunning = false;
+
+        const display = document.getElementById('display').querySelector('h3');
+
+        function updateTime(){
+
+            elapsedTime = Date.now() - startTime;
+
+            let totalMilliseconds = elapsedTime;
+
+            let hours = Math.floor(totalMilliseconds / (1000 * 60 * 60));
+            totalMilliseconds %= (1000 * 60 * 60);
+
+            let minutes = Math.floor(totalMilliseconds / (1000 * 60));
+            totalMilliseconds %= (1000 * 60);
+
+            let seconds = Math.floor(totalMilliseconds / 1000);
+            totalMilliseconds %= 1000;
+
+            let milliseconds = Math.floor(totalMilliseconds / 10);
+
+            const format = (unit) => String(unit).padStart(2, '0');
+
+            display.textContent = `${format(hours)}:${format(minutes)}:${format(seconds)}:${format(milliseconds)}`;
+        }
+        function start(){
+            if(!isRunning){
+                isRunning = true;
+                startTime = Date.now() - elapsedTime;
+                timerInterval = setInterval(updateTime, 10);
+            }
+        }
+        function stop(){
+            if(isRunning){
+                isRunning = false;
+                clearInterval(timerInterval);
+            }
+        }
+        function reset(){
+            isRunning = false;
+            clearInterval(timerInterval);
+            elapsedTime = 0;
+            startTime = 0;
+            display.textContent = '00:00:00:00';
+        }
+    </script>
+</body>
+
+</html>
